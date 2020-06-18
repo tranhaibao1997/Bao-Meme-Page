@@ -1,0 +1,28 @@
+{{#if myPath}}
+
+<ul class="img-wrapper">
+    {{#each myPath}}
+    <img data-img={{myPath}} onclick="openModal(event)" src={{myPath}} width="200px" height="200px">
+    {{/each}}
+</ul>
+
+
+<div class="myModal" id="myModal">
+
+</div>
+
+{{/if}}
+
+
+
+
+<script>
+
+    function openModal(e) {
+        console.log(e.target.attributes["data-img"].nodeValue)
+        document.getElementById("myModal").innerHTML=`
+        <img src=${e.target.attributes["data-img"].nodeValue}>
+        `
+        document.getElementById("myModal").style="opacity: 1; transform: translateY(0%); transition:0.5s"
+    }
+</script>

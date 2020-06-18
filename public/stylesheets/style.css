@@ -1,0 +1,29 @@
+html {
+  height: 100%;
+}
+body {
+  margin: 0px;
+  height: 100%;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+.container {
+  margin-top: 30px;
+}
+.img-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.img-wrapper img {
+  margin: 30px;
+  cursor: pointer;
+}
+#myModal {
+  opacity: 0;
+  transform: translateY(-200%);
+  transition:0.5s
+}
