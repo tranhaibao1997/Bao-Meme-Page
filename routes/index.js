@@ -4,9 +4,16 @@ var router = express.Router();
 const fs = require("fs")
 
 /* GET home page. */
+
+
+
+
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  console.log("index")
+  res.render('index', { title: "index" });
 });
+
+
 router.post("/upload", function (req, res, next) {
   upload(req, res, function (err) {
     if (err)
@@ -16,21 +23,25 @@ router.post("/upload", function (req, res, next) {
     let data = [...JSON.parse(fs.readFileSync("data.json").toString()), req.file]
     const dataJSON = JSON.stringify(data)
     fs.writeFileSync("data.json", dataJSON)
-    // let finalData = JSON.parse(fs.readFileSync("data.json").toString())
-
-    // let myPath=finalData.map(data => {
-      
-    //   return {myPath:`/images/originals/${data.filename}`}
-    // });
-    // console.log(myPath,"this is final")
-    // res.render("partials/pictures", {
-    //   myPath
-    // })
-
     res.redirect("/original")
-    
-
   })
-}
-)
+})
+
+router.post("/createMeme", function (req, res, next) {
+  try {
+    
+    let data = [...JSON.parse(fs.readFileSync("meme.json").toString()), req.body]
+    const dataJSON = JSON.stringify(data)
+    fs.writeFileSync("meme.json", dataJSON)
+    res.redirect("/meme")
+  }
+  catch (err) {
+    console.log(err)
+  }
+})
+
+
+
+
+
 module.exports = router;

@@ -23,7 +23,99 @@ body {
   cursor: pointer;
 }
 #myModal {
-  opacity: 0;
-  transform: translateY(-200%);
-  transition:0.5s
+  transform: translateY(-1000%);
+  transition: 0.5s;
+  background-color: white;
+  border: 1px solid white;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  position: fixed;
+  left: 50%;
+  top: 5%;
+  transform: translateX(-50%);
+  display: none;
+}
+.overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: black;
+  opacity: 0.3;
+}
+.icon-wrapper {
+  text-align: end;
+}
+.icon-wrapper i {
+  font-size: 30px;
+  color: crimson;
+  /* padding-bottom: 20px; */
+  padding: 10px;
+  cursor: pointer;
+}
+.icon-wrapper i:hover {
+  color: brown;
+}
+#modal-img-wrapper {
+  padding: 30px;
+  width: 100%;
+  background-color: whitesmoke;
+}
+#modal-img-wrapper img {
+  width: 500px;
+  height: 500px;
+}
+.meme-wrapper {
+  width: 300px;
+  height: 300px;
+  background-size: cover !important;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  position: relative;
+  cursor: pointer;
+}
+#top-content,#single-top-content {
+  position: absolute;
+  top: 0;
+  font-size: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+#bottom-content,#single-bottom-content {
+  position: absolute;
+  bottom: 0;
+  font-size: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+.single-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: currentColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.single-img-content img
+{
+  width: 600px;
+  height: 600px;
+}
+.single-img-content
+{
+  position: relative; ;
 }

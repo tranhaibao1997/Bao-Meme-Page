@@ -2,14 +2,35 @@
 
 <ul class="img-wrapper">
     {{#each myPath}}
-    <img data-img={{myPath}} onclick="openModal(event)" src={{myPath}} width="200px" height="200px">
+    <img data-img={{myPath}} onclick="openModal(event)" src={{myPath}} width="300px" height="300px">
     {{/each}}
 </ul>
 
-
-<div class="myModal" id="myModal">
+<div class="overlay" id="overlay">
 
 </div>
+
+<div class="myModal" id="myModal">
+    <div class="icon-wrapper">
+        <i onclick="closeModal()" class="fas fa-window-close"></i>
+    </div>
+
+    <div class="modal-img-wrapper" id="modal-img-wrapper">
+
+    </div>
+    <form type="submit">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Top Content</label>
+        <input id="top" type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Bot Content</label>
+        <input id="bottom" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+    </div>
+    <button onclick="createMeme()" type="submit" class="btn btn-primary">Create Meme</button>
+    </form>
+</div>
+
 
 {{/if}}
 
@@ -18,11 +39,47 @@
 
 <script>
 
+    let memeImg = ""
+
     function openModal(e) {
+        console.log("a")
+        document.getElementById("myModal").style = "display:block"
         console.log(e.target.attributes["data-img"].nodeValue)
-        document.getElementById("myModal").innerHTML=`
+        memeImg = e.target.attributes["data-img"].nodeValue
+        document.getElementById("modal-img-wrapper").innerHTML = `
         <img src=${e.target.attributes["data-img"].nodeValue}>
         `
-        document.getElementById("myModal").style="opacity: 1; transform: translateY(0%); transition:0.5s"
+
+        document.getElementById("overlay").style = "display:block"
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style = "display:none"
+        document.getElementById("overlay").style = "display:none"
+    }
+
+    async function createMeme() {
+        console.log("Submit roi")
+
+
+        const meme = { top: document.getElementById("top").value, bottom: document.getElementById("bottom").value, img: memeImg };
+        console.log(meme)
+        const url = `/createMeme`;
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(meme)
+            });
+            let data = await response.json()
+            console.log(data)
+            window.location.reload()
+        }
+        catch (err) {
+            console.log(err)
+        }
+
     }
 </script>
