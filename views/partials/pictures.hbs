@@ -27,7 +27,7 @@
         <label for="formGroupExampleInput2">Bot Content</label>
         <input id="bottom" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
     </div>
-    <button onclick="createMeme()" type="submit" class="btn btn-primary">Create Meme</button>
+    <button onclick="createMeme(event)" type="submit" class="btn btn-primary">Create Meme</button>
     </form>
 </div>
 
@@ -42,7 +42,7 @@
     let memeImg = ""
 
     function openModal(e) {
-        console.log("a")
+       
         document.getElementById("myModal").style = "display:block"
         console.log(e.target.attributes["data-img"].nodeValue)
         memeImg = e.target.attributes["data-img"].nodeValue
@@ -58,13 +58,22 @@
         document.getElementById("overlay").style = "display:none"
     }
 
-    async function createMeme() {
+    async function createMeme(e) {
+         e.preventDefault();
         console.log("Submit roi")
+        if(document.getElementById("top").value=="" || document.getElementById("bottom").value=="")
+        {
+            alert("You need to write something!!!")
+            return;
+        }
+
+        let imgId=memeImg.split("/")[3]
+      
+      
 
 
-        const meme = { top: document.getElementById("top").value, bottom: document.getElementById("bottom").value, img: memeImg };
-        console.log(meme)
-        const url = `/createMeme`;
+        const meme = { top: document.getElementById("top").value, bottom: document.getElementById("bottom").value, img: imgId};
+        const url = `/original/addText/${imgId}`;
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -75,7 +84,7 @@
             });
             let data = await response.json()
             console.log(data)
-            window.location.reload()
+            
         }
         catch (err) {
             console.log(err)
