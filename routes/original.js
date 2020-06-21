@@ -85,8 +85,7 @@ router.post("/addText/:id", async (req, res, next) => { // the path can be chang
     let data1 = [...JSON.parse(fs.readFileSync("meme.json").toString()), {img:newMeme}]
     const dataJSON = JSON.stringify(data1)
     fs.writeFileSync("meme.json", dataJSON)
-    res.send("OK")
-    // return res.redirect("/meme"); // this path can be changed depends on your code
+    return res.redirect("/meme"); // this path can be changed depends on your code
   } catch (err) {
     next(err);
   }
